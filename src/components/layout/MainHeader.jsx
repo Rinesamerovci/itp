@@ -8,7 +8,7 @@ const headerLinks = [
   { label: "Informata", active: false },
 ];
 
-export default function MainHeader({ onMenuToggle }) {
+export default function MainHeader({ onMenuToggle, showNavigation = true, showRoleSwitcher = true }) {
   return (
     <header className="sticky top-0 z-30 h-[72px] border-b border-brand-border bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08)]">
       <div className="mx-auto flex h-full max-w-[1240px] items-center justify-between gap-6 px-4 md:px-6">
@@ -23,23 +23,27 @@ export default function MainHeader({ onMenuToggle }) {
           <EKosovaLogo compact />
         </div>
 
-        <nav className="hidden items-center gap-10 lg:flex">
-          {headerLinks.map((item) => (
-            <span
-              key={item.label}
-              className="group inline-flex cursor-default items-center gap-2 text-sm font-medium text-brand-navy"
-            >
-              <span className="text-base text-brand-navy/70">{">"}</span>
+        {showNavigation ? (
+          <nav className="hidden items-center gap-10 lg:flex">
+            {headerLinks.map((item) => (
               <span
-                className={`border-b transition group-hover:border-brand-navy ${
-                  item.active ? "border-brand-navy font-semibold" : "border-transparent"
-                }`}
+                key={item.label}
+                className="group inline-flex cursor-default items-center gap-2 text-sm font-medium text-brand-navy"
               >
-                {item.label}
+                <span className="text-base text-brand-navy/70">{">"}</span>
+                <span
+                  className={`border-b transition group-hover:border-brand-navy ${
+                    item.active ? "border-brand-navy font-semibold" : "border-transparent"
+                  }`}
+                >
+                  {item.label}
+                </span>
               </span>
-            </span>
-          ))}
-        </nav>
+            ))}
+          </nav>
+        ) : (
+          <div className="hidden flex-1 lg:block" />
+        )}
 
         <div className="flex items-center gap-3">
           <button
@@ -51,7 +55,7 @@ export default function MainHeader({ onMenuToggle }) {
               0
             </span>
           </button>
-          <RoleSwitcher />
+          {showRoleSwitcher ? <RoleSwitcher /> : null}
         </div>
       </div>
     </header>

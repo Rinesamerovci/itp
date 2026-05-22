@@ -65,7 +65,7 @@ const sr = {
     namePlaceholder: "Unesite puno ime",
   },
   dashboard: {
-    welcomeParent: "Roditeljski panel",
+    welcomeParent: "Roditeljski prikaz",
     welcomeProvider: "Panel zdravstvenog radnika",
     nextAction: "Sledeci korak",
     noChildren: "Jos nema registrovane dece.",
@@ -199,6 +199,22 @@ const sr = {
     serviceTitle: "VitaKid",
     serviceDescription:
       "Ovaj modul postavlja projekat VitaKid kao deo eKosova stranice usluga, sa brzim pristupom za roditelje i medicinsko osoblje.",
+    detail: {
+      badge: "Detalji usluge",
+      infoTitle: "Sta ukljucuje",
+      infoText: "Ova stranica prikazuje glavne informacije, opis i svrhu usluge.",
+      processTitle: "Kako se koristi",
+      processText: "Procitajte detalje, zatim se vratite na listu ili otvorite uslugu kada je dostupna.",
+      supportTitle: "Sigurnost i podrska",
+      supportText: "Informacije su prikazane jasno kako bi roditelji i osoblje lakse razumeli uslugu.",
+      nextStepTitle: "Sledeci korak",
+      vitakidParentNextStep: "Otvorite VitaKid da nastavite u roditeljskom prikazu sa decom, vakcinama i QR pasosem.",
+      vitakidDoctorNextStep: "Otvorite VitaKid da nastavite u prikazu lekara / medicinskog osoblja sa pacijentima, vakcinama, izvestajima i analitikom.",
+      generalNextStep: "Ova usluga je informativna u ovom prototipu. Mozete se vratiti na listu usluga i pogledati druge usluge.",
+      backToServices: "Nazad na usluge",
+      notFoundTitle: "Usluga nije pronadjena",
+      notFoundDescription: "Ova usluga ne postoji u trenutnoj listi.",
+    },
     workspaceBadge: "Prostor usluge",
     workspaceDescription:
       "Koristite meni na ovoj posebnoj VitaKid stranici da otvorite bilo koji deo usluge.",

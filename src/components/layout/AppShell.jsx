@@ -10,7 +10,7 @@ import {
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "../../hooks/useTranslation";
-import { buildAppPath } from "../../lib/routes";
+import { serviceCardIds } from "../../lib/portalServices";
 import MainHeader from "./MainHeader";
 import Sidebar from "./Sidebar";
 import TopUtilityBar from "./TopUtilityBar";
@@ -21,30 +21,6 @@ const categoryKeys = [
   "portal.filters.pregnancy",
   "portal.filters.birth",
   "portal.filters.childCare",
-];
-
-const serviceCardIds = [
-  "vitakid",
-  "familyPlanning",
-  "safeMotherhood",
-  "reproductiveInfections",
-  "dysmenorrhea",
-  "pelvicInflammation",
-  "reproductiveCancerPrevention",
-  "pregnancyTest",
-  "educationRooms",
-  "care1000Days",
-  "homeVisits",
-  "breastExam",
-  "ultrasound",
-  "gynecologyExam",
-  "smearCollection",
-  "ambulatoryVisits",
-  "colposcopy",
-  "earlyCare",
-  "childEducation",
-  "educationSixMonthsToSixYears",
-  "educationTwoToSevenYears",
 ];
 
 export default function AppShell() {
@@ -65,14 +41,14 @@ export default function AppShell() {
   const featuredCard = cards[0];
   const listCards = cards.slice(1);
 
-  function openVitaKidPage() {
-    navigate(buildAppPath());
+  function openServiceDetail(serviceId = "vitakid") {
+    navigate(`/service/${serviceId}`);
   }
 
   return (
     <div className="min-h-screen bg-[#f7f7f7] text-brand-primary">
       <TopUtilityBar />
-      <MainHeader onMenuToggle={() => setMobileOpen((value) => !value)} />
+      <MainHeader showRoleSwitcher={false} onMenuToggle={() => setMobileOpen((value) => !value)} />
       <Sidebar mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
 
       <main className="pb-12">
@@ -93,6 +69,7 @@ export default function AppShell() {
               <div className="mt-7 flex justify-center">
                 <button
                   type="button"
+                  onClick={() => openServiceDetail()}
                   className="rounded-md bg-[#1f5d9f] px-[4.2rem] py-3 text-base font-medium text-white shadow-sm transition hover:bg-[#1c538e]"
                 >
                   {t("portal.showMore")}
@@ -145,11 +122,11 @@ export default function AppShell() {
                 <article
                   role="button"
                   tabIndex={0}
-                  onClick={openVitaKidPage}
+                  onClick={() => openServiceDetail(featuredCard.id)}
                   onKeyDown={(event) => {
                     if (event.key === "Enter" || event.key === " ") {
                       event.preventDefault();
-                      openVitaKidPage();
+                      openServiceDetail(featuredCard.id);
                     }
                   }}
                   className="cursor-pointer rounded-[18px] bg-white px-5 py-5 shadow-[0_8px_20px_rgba(0,0,0,0.18)] ring-2 ring-brand-teal/30"
@@ -162,7 +139,7 @@ export default function AppShell() {
                       type="button"
                       onClick={(event) => {
                         event.stopPropagation();
-                        openVitaKidPage();
+                        openServiceDetail(featuredCard.id);
                       }}
                       className="inline-flex items-center gap-2 rounded-md bg-brand-teal px-4 py-2 text-sm font-semibold text-white"
                     >
@@ -181,7 +158,14 @@ export default function AppShell() {
                       <h2 className="text-[1rem] font-semibold leading-[1.25] text-[#1f5d9f]">{card.title}</h2>
                       <p className="mt-7 text-[0.99rem] leading-[1.9] text-brand-primary">{card.description}</p>
                       <div className="mt-6 flex items-center justify-between gap-3">
-                        <span className="text-sm text-[#6f7683]">{t("portal.serviceCardHint")}</span>
+                        <button
+                          type="button"
+                          onClick={() => openServiceDetail(card.id)}
+                          className="inline-flex items-center gap-2 text-sm font-semibold text-brand-teal"
+                        >
+                          {t("portal.serviceCardHint")}
+                          <ChevronRight className="h-4 w-4" />
+                        </button>
                       </div>
                     </article>
                   ))}

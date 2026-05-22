@@ -65,7 +65,7 @@ const en = {
     namePlaceholder: "Enter your full name",
   },
   dashboard: {
-    welcomeParent: "Parent dashboard",
+    welcomeParent: "Parent view",
     welcomeProvider: "Provider dashboard",
     nextAction: "Next action",
     noChildren: "No children registered yet.",
@@ -199,6 +199,22 @@ const en = {
     serviceTitle: "VitaKid",
     serviceDescription:
       "This module places the VitaKid project inside the eKosova services page, with quick access for parents and medical staff.",
+    detail: {
+      badge: "Service details",
+      infoTitle: "What it includes",
+      infoText: "This page shows the main information, description, and purpose of the service.",
+      processTitle: "How to use it",
+      processText: "Read the details, then return to the list or open the service when it is available.",
+      supportTitle: "Safety and support",
+      supportText: "Information is presented clearly so parents and staff can understand the service more easily.",
+      nextStepTitle: "Next step",
+      vitakidParentNextStep: "Open VitaKid to continue in the parent view with children, vaccines, and the QR passport.",
+      vitakidDoctorNextStep: "Open VitaKid to continue in the doctor / medical staff view with patients, vaccines, reports, and analytics.",
+      generalNextStep: "This service is informational in this prototype. You can return to the service list to view other services.",
+      backToServices: "Back to services",
+      notFoundTitle: "Service not found",
+      notFoundDescription: "This service does not exist in the current list.",
+    },
     workspaceBadge: "Service workspace",
     workspaceDescription:
       "Use the menu on this dedicated VitaKid page to enter any section of the service.",

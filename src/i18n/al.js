@@ -65,7 +65,7 @@ const al = {
     namePlaceholder: "Shkruani emrin e plote",
   },
   dashboard: {
-    welcomeParent: "Paneli i prindit",
+    welcomeParent: "Pamja e prindit",
     welcomeProvider: "Paneli i ofruesit",
     nextAction: "Veprimi i ardhshem",
     noChildren: "Nuk ka ende femije te regjistruar.",
@@ -199,6 +199,22 @@ const al = {
     serviceTitle: "VitaKid",
     serviceDescription:
       "Ky modul e vendos projektin VitaKid si pjes\u00eb t\u00eb faqes s\u00eb sh\u00ebrbimeve t\u00eb eKosova, me qasje t\u00eb shpejt\u00eb p\u00ebr prind\u00ebrit dhe stafin mjek\u00ebsor.",
+    detail: {
+      badge: "Detajet e sherbimit",
+      infoTitle: "Cfare perfshin",
+      infoText: "Ketu shfaqen te dhenat kryesore, pershkrimi dhe qellimi i sherbimit.",
+      processTitle: "Si perdoret",
+      processText: "Lexoni detajet, pastaj kthehuni te lista ose hapni sherbimin kur eshte i disponueshem.",
+      supportTitle: "Siguri dhe mbeshtetje",
+      supportText: "Informacioni paraqitet qarte qe prinderit dhe stafi ta kuptojne me lehte sherbimin.",
+      nextStepTitle: "Hapi tjeter",
+      vitakidParentNextStep: "Hapni VitaKid per te vazhduar ne pamjen e prindit me femijet, vaksinat dhe pasaporten QR.",
+      vitakidDoctorNextStep: "Hapni VitaKid per te vazhduar ne pamjen e mjekut / stafit mjekesor me pacientet, vaksinat, raportet dhe analitikat.",
+      generalNextStep: "Ky sherbim eshte informues ne kete prototip. Mund te ktheheni te lista e sherbimeve per te pare sherbime te tjera.",
+      backToServices: "Kthehu te sherbimet",
+      notFoundTitle: "Sherbimi nuk u gjet",
+      notFoundDescription: "Ky sherbim nuk ekziston ne listen aktuale.",
+    },
     workspaceBadge: "Hap\u00ebsira e sh\u00ebrbimit",
     workspaceDescription:
       "P\u00ebrdorni menyn\u00eb n\u00eb k\u00ebt\u00eb faqe t\u00eb dedikuar p\u00ebr t\u00eb hyr\u00eb n\u00eb \u00e7do pjes\u00eb t\u00eb VitaKid.",

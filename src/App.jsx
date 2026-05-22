@@ -9,6 +9,7 @@ import CoverageAnalytics from "./pages/CoverageAnalytics";
 import HomeVisitReport from "./pages/HomeVisitReport";
 import OutbreakMap from "./pages/OutbreakMap";
 import ParentDashboard from "./pages/ParentDashboard";
+import PortalServiceDetail from "./pages/PortalServiceDetail";
 import ProviderDashboard from "./pages/ProviderDashboard";
 import StaffDirectory from "./pages/StaffDirectory";
 import StaffProfile from "./pages/StaffProfile";
@@ -67,6 +68,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<AppShell />} />
+      <Route path="/service/:serviceId" element={<PortalServiceDetail />} />
       <Route
         path={buildAppPath()}
         element={
