@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #111827;
+  --color-brand-navy: #1b3a6b;
+  --color-brand-gold: #f5a800;
+  --color-brand-teal: #0f6e56;
+  --color-page-background: #f3f4f6;
+  --color-card-background: #ffffff;
+  --color-border: #e5e7eb;
+  --color-text-primary: #111827;
+  --color-text-secondary: #6b7280;
+  --color-background-success: #e5f3da;
+  --color-text-success: #3b6d11;
+  background: #f7f7f7;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: #f7f7f7;
+  color: var(--color-text-primary);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(27, 58, 107, 0.28);
+  border-radius: 999px;
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(18px);
+}
+
+.panel-card {
+  background: var(--color-card-background);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.field-shell {
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  background: #ffffff;
+}
+
+.page-hero {
+  background:
+    linear-gradient(135deg, rgba(27, 58, 107, 0.98), rgba(23, 49, 88, 0.94)),
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.18), transparent 36%);
+}
+
+::selection {
+  background: rgba(27, 58, 107, 0.16);
+}
