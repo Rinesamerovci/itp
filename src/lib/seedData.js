@@ -44,6 +44,9 @@ const milestoneTemplates = [
   { id: "walks-alone", name: "Walks independently", ageGroup: "1-2y", dueMonths: 18 },
   { id: "two-word", name: "Uses two-word phrases", ageGroup: "2-5y", dueMonths: 24 },
   { id: "school-ready", name: "Ready for school tasks", ageGroup: "5-10y", dueMonths: 60 },
+  { id: "peer-collaboration", name: "Works well with peers and group activities", ageGroup: "10-13y", dueMonths: 132 },
+  { id: "emotional-regulation", name: "Shows age-appropriate emotional regulation", ageGroup: "13-15y", dueMonths: 156 },
+  { id: "independent-health-habits", name: "Manages healthy routines more independently", ageGroup: "15-18y", dueMonths: 180 },
 ];
 
 function createVaccineRecords(dob, overrides = {}) {

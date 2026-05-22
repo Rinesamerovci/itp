@@ -4,9 +4,10 @@ import { Download, QrCode, X } from "lucide-react";
 import { useTranslation } from "../hooks/useTranslation";
 import { formatDate } from "../lib/date";
 
-export default function QRPassport({ child, open, onClose }) {
+export default function QRPassport({ child, open, onClose, inline = false }) {
   const { t } = useTranslation();
   const canvasRef = useRef(null);
+  const isVisible = inline || open;
 
   const passportData = useMemo(
     () => ({
@@ -22,7 +23,7 @@ export default function QRPassport({ child, open, onClose }) {
   );
 
   useEffect(() => {
-    if (!open || !canvasRef.current || !child) {
+    if (!isVisible || !canvasRef.current || !child) {
       return;
     }
 
@@ -31,9 +32,9 @@ export default function QRPassport({ child, open, onClose }) {
       margin: 2,
       color: { dark: "#0F6E56", light: "#FFFFFF" },
     });
-  }, [child, open, passportData]);
+  }, [child, isVisible, passportData]);
 
-  if (!open || !child) {
+  if (!isVisible || !child) {
     return null;
   }
 
@@ -45,14 +46,15 @@ export default function QRPassport({ child, open, onClose }) {
     anchor.click();
   }
 
-  return (
-    <div className="fixed inset-0 z-40 flex items-center justify-center bg-slate-950/60 px-4 py-6">
-      <div className="max-h-full w-full max-w-3xl overflow-y-auto rounded-[2rem] bg-white p-6 shadow-2xl">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-teal">{t("child.qrPassport")}</p>
-            <h3 className="mt-2 text-2xl font-semibold text-slate-950">{t("child.scanLabel")}</h3>
-          </div>
+  const content = (
+    <div className={`${inline ? "panel-card rounded-[1.75rem] p-6" : "max-h-full w-full max-w-3xl overflow-y-auto rounded-[2rem] bg-white p-6 shadow-2xl"}`}>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-teal">{t("child.qrPassport")}</p>
+          <h3 className="mt-2 text-2xl font-semibold text-slate-950">{t("child.scanLabel")}</h3>
+          {inline ? <p className="mt-2 max-w-2xl text-sm text-brand-secondary">{t("child.passportSummary")}</p> : null}
+        </div>
+        {!inline ? (
           <button
             type="button"
             onClick={onClose}
@@ -60,38 +62,55 @@ export default function QRPassport({ child, open, onClose }) {
           >
             <X className="h-5 w-5" />
           </button>
+        ) : null}
+      </div>
+
+      <div className="mt-6 grid gap-6 lg:grid-cols-[280px,1fr]">
+        <div className="rounded-[1.75rem] bg-brand-sand/60 p-5 text-center">
+          <div className="flex items-center justify-center gap-2 text-brand-teal">
+            <QrCode className="h-5 w-5" />
+            <span className="font-semibold">{child.name}</span>
+          </div>
+          <canvas ref={canvasRef} className="mx-auto mt-5 rounded-3xl bg-white p-3 shadow-sm" />
+          <p className="mt-4 text-sm text-slate-600">{t("child.passportOffline")}</p>
+          <button
+            type="button"
+            onClick={handleDownload}
+            className="mt-5 inline-flex items-center gap-2 rounded-full bg-brand-teal px-4 py-2 text-sm font-medium text-white"
+          >
+            <Download className="h-4 w-4" />
+            {t("common.download")}
+          </button>
         </div>
 
-        <div className="mt-6 grid gap-6 lg:grid-cols-[280px,1fr]">
-          <div className="rounded-[1.75rem] bg-brand-sand/60 p-5 text-center">
-            <div className="flex items-center justify-center gap-2 text-brand-teal">
-              <QrCode className="h-5 w-5" />
-              <span className="font-semibold">{child.name}</span>
-            </div>
-            <canvas ref={canvasRef} className="mx-auto mt-5 rounded-3xl bg-white p-3 shadow-sm" />
-            <p className="mt-4 text-sm text-slate-600">{t("child.passportOffline")}</p>
-            <button
-              type="button"
-              onClick={handleDownload}
-              className="mt-5 inline-flex items-center gap-2 rounded-full bg-brand-teal px-4 py-2 text-sm font-medium text-white"
-            >
-              <Download className="h-4 w-4" />
-              {t("common.download")}
-            </button>
+        <div className="rounded-[1.75rem] border border-slate-200 p-5">
+          <div className="grid gap-4 sm:grid-cols-2">
+            <Field label={t("common.name")} value={child.name} />
+            <Field label={t("child.dob")} value={formatDate(child.dob)} />
+            <Field label={t("child.bloodType")} value={child.bloodType || t("child.documentUnknown")} />
+            <Field label={t("child.allergies")} value={child.allergies || t("common.none")} />
+            <Field label={t("child.lastCheckup")} value={formatDate(child.lastSeen)} />
+            <Field label={t("common.vaccines")} value={passportData.vaccinesGiven?.join(", ") || "--"} />
           </div>
 
-          <div className="rounded-[1.75rem] border border-slate-200 p-5">
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Field label={t("common.name")} value={child.name} />
-              <Field label={t("child.dob")} value={formatDate(child.dob)} />
-              <Field label={t("child.bloodType")} value={child.bloodType} />
-              <Field label={t("child.allergies")} value={child.allergies || t("common.none")} />
-              <Field label={t("child.lastCheckup")} value={formatDate(child.lastSeen)} />
-              <Field label={t("common.vaccines")} value={passportData.vaccinesGiven?.join(", ") || "--"} />
+          {inline ? (
+            <div className="mt-5 rounded-2xl bg-brand-teal/5 p-4 text-sm text-brand-secondary">
+              <p className="font-medium text-brand-primary">{t("child.documentTitle")}</p>
+              <p className="mt-2">{t("child.documentNote")}</p>
             </div>
-          </div>
+          ) : null}
         </div>
       </div>
+    </div>
+  );
+
+  if (inline) {
+    return content;
+  }
+
+  return (
+    <div className="fixed inset-0 z-40 flex items-center justify-center bg-slate-950/60 px-4 py-6">
+      {content}
     </div>
   );
 }

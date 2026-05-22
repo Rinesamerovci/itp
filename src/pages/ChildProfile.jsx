@@ -22,6 +22,7 @@ const blankChildForm = {
   dob: "",
   bloodType: "",
   allergies: "",
+  chronicIllnesses: "",
   clinicId: "",
 };
 
@@ -46,6 +47,7 @@ export default function ChildProfile() {
         dob: bundle.child.dob,
         bloodType: bundle.child.bloodType,
         allergies: bundle.child.allergies,
+        chronicIllnesses: bundle.child.chronicIllnesses || "",
         clinicId: bundle.child.clinicId,
       });
     }
@@ -211,6 +213,7 @@ export default function ChildProfile() {
             <Input label={t("child.dob")} type="date" value={childForm.dob} onChange={(value) => setChildForm((current) => ({ ...current, dob: value }))} />
             <Input label={t("child.bloodType")} value={childForm.bloodType} onChange={(value) => setChildForm((current) => ({ ...current, bloodType: value }))} />
             <Input label={t("child.allergies")} value={childForm.allergies} onChange={(value) => setChildForm((current) => ({ ...current, allergies: value }))} />
+            <Input label={t("child.chronicIllnesses")} value={childForm.chronicIllnesses} onChange={(value) => setChildForm((current) => ({ ...current, chronicIllnesses: value }))} />
             <Input label={t("child.clinic")} value={childForm.clinicId} onChange={(value) => setChildForm((current) => ({ ...current, clinicId: value }))} />
             <button
               type="submit"

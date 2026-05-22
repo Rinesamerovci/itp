@@ -3,7 +3,7 @@ import { useTranslation } from "../hooks/useTranslation";
 import { monthsOverdue } from "../lib/date";
 import { translateMilestone } from "../lib/localize";
 
-const groups = ["0-3m", "3-6m", "6-12m", "1-2y", "2-5y", "5-10y"];
+const groups = ["0-3m", "3-6m", "6-12m", "1-2y", "2-5y", "5-10y", "10-13y", "13-15y", "15-18y"];
 
 export default function MilestoneGrid({ milestones, onSave, savingId, readOnly = false }) {
   const { t } = useTranslation();

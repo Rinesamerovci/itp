@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { LoaderCircle, QrCode } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 import ChildCard from "../components/ChildCard";
 import EmptyState from "../components/EmptyState";
 import MilestoneGrid from "../components/MilestoneGrid";
@@ -19,8 +19,7 @@ export default function ChildFeatureHub({ section }) {
   const { t } = useTranslation();
   const { children, loading } = useChildren(currentRole);
   const [selectedChildId, setSelectedChildId] = useState("");
-  const [qrOpen, setQrOpen] = useState(false);
-  const { bundle, loading: childLoading, saveVaccine, saveMilestone } = useChild(selectedChildId, currentRole);
+  const { bundle, loading: childLoading, error, saveVaccine, saveMilestone } = useChild(selectedChildId, currentRole);
 
   useEffect(() => {
     if (!children.length) {
@@ -75,6 +74,10 @@ export default function ChildFeatureHub({ section }) {
   const selectedChild = children.find((child) => child.id === selectedChildId);
   const readOnly = currentRole !== "doctor";
 
+  if (error && section !== "children") {
+    return <EmptyState title={t("child.accessDenied")} description={t("child.accessHelp")} />;
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
@@ -119,16 +122,6 @@ export default function ChildFeatureHub({ section }) {
                 <h2 className="text-xl font-semibold text-brand-primary">{selectedChild.name}</h2>
                 <p className="mt-1 text-sm text-brand-secondary">{getAgeLabel(selectedChild.dob)}</p>
               </div>
-              {section === "qr" ? (
-                <button
-                  type="button"
-                  onClick={() => setQrOpen(true)}
-                  className="inline-flex items-center gap-2 rounded-lg bg-brand-teal px-4 py-3 text-sm font-semibold text-white"
-                >
-                  <QrCode className="h-4 w-4" />
-                  {t("layout.openPassport")}
-                </button>
-              ) : null}
             </div>
           </section>
 
@@ -152,10 +145,7 @@ export default function ChildFeatureHub({ section }) {
 
           {section === "qr" ? (
             <>
-              <div className="panel-card rounded-xl p-6">
-                <p className="text-sm text-brand-secondary">{t("child.passportOffline")}</p>
-              </div>
-              <QRPassport child={bundle.child} open={qrOpen} onClose={() => setQrOpen(false)} />
+              <QRPassport child={bundle.child} inline />
             </>
           ) : null}
 

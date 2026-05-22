@@ -5,14 +5,13 @@ import VitaKidShell from "./components/layout/VitaKidShell";
 import { useRole } from "./context/RoleContext";
 import ChildFeatureHub from "./pages/ChildFeatureHub";
 import ChildProfile from "./pages/ChildProfile";
-import CoverageAnalytics from "./pages/CoverageAnalytics";
 import HomeVisitReport from "./pages/HomeVisitReport";
-import OutbreakMap from "./pages/OutbreakMap";
 import ParentDashboard from "./pages/ParentDashboard";
 import PortalServiceDetail from "./pages/PortalServiceDetail";
 import ProviderDashboard from "./pages/ProviderDashboard";
 import StaffDirectory from "./pages/StaffDirectory";
 import StaffProfile from "./pages/StaffProfile";
+import TeacherQRCodePage from "./pages/TeacherQRCodePage";
 import VisitReportHistory from "./pages/VisitReportHistory";
 import { useTranslation } from "./hooks/useTranslation";
 import { ensureDemoSeed, maybeSeedFirestore } from "./lib/demoDb";
@@ -112,6 +111,14 @@ export default function App() {
         }
       />
       <Route
+        path={buildAppPath("/teacher-qr-code")}
+        element={
+          <VitaKidShell>
+            <TeacherQRCodePage />
+          </VitaKidShell>
+        }
+      />
+      <Route
         path={buildAppPath("/reminders")}
         element={
           <VitaKidShell>
@@ -163,26 +170,6 @@ export default function App() {
           <VitaKidShell>
             <DoctorOnlySection>
               <VisitReportHistory />
-            </DoctorOnlySection>
-          </VitaKidShell>
-        }
-      />
-      <Route
-        path={buildAppPath("/outbreak")}
-        element={
-          <VitaKidShell>
-            <DoctorOnlySection>
-              <OutbreakMap />
-            </DoctorOnlySection>
-          </VitaKidShell>
-        }
-      />
-      <Route
-        path={buildAppPath("/coverage-analytics")}
-        element={
-          <VitaKidShell>
-            <DoctorOnlySection>
-              <CoverageAnalytics />
             </DoctorOnlySection>
           </VitaKidShell>
         }

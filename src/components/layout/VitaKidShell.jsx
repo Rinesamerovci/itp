@@ -47,18 +47,13 @@ export default function VitaKidShell({ children }) {
               </div>
 
               <div className="border-b border-brand-border pb-5">
-                <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-teal">{t("portal.workspaceBadge")}</p>
-                    <h1 className="mt-2 text-[1.8rem] font-semibold text-brand-primary">{currentNavLabel}</h1>
-                    <p className="mt-2 max-w-3xl text-sm leading-6 text-brand-secondary">{t("portal.workspaceDescription")}</p>
-                  </div>
-                  <div className="rounded-full bg-brand-teal/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-brand-teal">
-                    {currentRole === "doctor" ? t("layout.roles.doctor") : t("layout.roles.parent")}
-                  </div>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-teal">{t("portal.workspaceBadge")}</p>
+                  <h1 className="mt-2 text-[1.8rem] font-semibold text-brand-primary">{currentNavLabel}</h1>
+                  <p className="mt-2 max-w-3xl text-sm leading-6 text-brand-secondary">{t("portal.workspaceDescription")}</p>
                 </div>
 
-                <div className="mt-5 flex flex-wrap gap-2">
+                <div className="mt-5 flex flex-wrap justify-center gap-2">
                   {items.map((item) => {
                     const Icon = item.icon;
                     const active = isNavItemActive(location.pathname, item.to);

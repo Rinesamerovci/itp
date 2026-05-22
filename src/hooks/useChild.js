@@ -48,6 +48,9 @@ export function useChild(childId, currentRole = "parent") {
 
   async function reload() {
     if (!childId) {
+      setBundle(null);
+      setError("");
+      setLoading(false);
       return;
     }
     setLoading(true);

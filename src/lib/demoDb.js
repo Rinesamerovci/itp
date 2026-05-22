@@ -58,13 +58,34 @@ function normalizeUserRecord(user = {}) {
 }
 
 function normalizeDatabase(data) {
+  const children = data.children ?? {};
+  const blankRecordsByChild = Object.fromEntries(
+    Object.entries(children).map(([childId, child]) => [childId, createBlankChildRecords(child.dob)]),
+  );
+
   return {
     users: Object.fromEntries(
       Object.entries(data.users ?? {}).map(([uid, user]) => [uid, normalizeUserRecord(user)]),
     ),
-    children: data.children ?? {},
-    vaccines: data.vaccines ?? {},
-    milestones: data.milestones ?? {},
+    children,
+    vaccines: Object.fromEntries(
+      Object.entries(children).map(([childId]) => [
+        childId,
+        {
+          ...(blankRecordsByChild[childId]?.vaccines ?? {}),
+          ...(data.vaccines?.[childId] ?? {}),
+        },
+      ]),
+    ),
+    milestones: Object.fromEntries(
+      Object.entries(children).map(([childId]) => [
+        childId,
+        {
+          ...(blankRecordsByChild[childId]?.milestones ?? {}),
+          ...(data.milestones?.[childId] ?? {}),
+        },
+      ]),
+    ),
     events: data.events ?? {},
     notifications: data.notifications ?? {},
     homeVisitReports: data.homeVisitReports ?? {},
@@ -120,7 +141,8 @@ function canAccessChild(child, viewer, users) {
   }
 
   if (viewer.role === "provider") {
-    return child.clinicId && child.clinicId === users[viewer.uid]?.clinicId;
+    const viewerClinicId = viewer.clinicId || users[viewer.uid]?.clinicId;
+    return child.clinicId && child.clinicId === viewerClinicId;
   }
 
   return false;
@@ -253,6 +275,7 @@ export async function addChild(parentUid, values) {
     dob: values.dob,
     bloodType: values.bloodType || "--",
     allergies: values.allergies || "",
+    chronicIllnesses: values.chronicIllnesses || "",
     clinicId,
     riskScore: "LOW",
     createdAt: new Date().toISOString(),

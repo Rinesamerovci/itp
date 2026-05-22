@@ -45,7 +45,7 @@ export default function MainHeader({ onMenuToggle, showNavigation = true, showRo
           <div className="hidden flex-1 lg:block" />
         )}
 
-        <div className="flex items-center gap-3">
+        {/* <div className="flex items-center gap-3">
           <button
             type="button"
             className="relative inline-flex h-10 w-10 items-center justify-center rounded-xl border border-brand-border bg-white text-brand-navy shadow-sm"
@@ -56,7 +56,7 @@ export default function MainHeader({ onMenuToggle, showNavigation = true, showRo
             </span>
           </button>
           {showRoleSwitcher ? <RoleSwitcher /> : null}
-        </div>
+        </div> */}
       </div>
     </header>
   );

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { LoaderCircle, Plus } from "lucide-react";
 import ChildCard from "../components/ChildCard";
 import EmptyState from "../components/EmptyState";
@@ -6,6 +7,7 @@ import { useChildren } from "../hooks/useChild";
 import { useToast } from "../hooks/useToast";
 import { useTranslation } from "../hooks/useTranslation";
 import { preventAccidentalEnterSubmit } from "../lib/forms";
+import { buildAppPath } from "../lib/routes";
 import { getParentViewer } from "../lib/localProfile";
 
 const blankChild = {
@@ -13,6 +15,7 @@ const blankChild = {
   dob: "",
   bloodType: "",
   allergies: "",
+  chronicIllnesses: "",
   clinicId: "clinic-prishtina",
 };
 
@@ -67,14 +70,22 @@ export default function ParentDashboard() {
             </p>
             <p className="mt-3 max-w-2xl text-sm text-brand-secondary">{t("dashboard.overviewText")}</p>
           </div>
-          <button
-            type="button"
-            onClick={() => setShowAdd(true)}
-            className="inline-flex items-center gap-2 rounded-lg bg-brand-teal px-4 py-3 text-sm font-semibold text-white"
-          >
-            <Plus className="h-4 w-4" />
-            {t("common.addChild")}
-          </button>
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              to={buildAppPath("/teacher-qr-code")}
+              className="inline-flex items-center gap-2 rounded-lg border border-brand-teal bg-white px-4 py-3 text-sm font-semibold text-brand-teal"
+            >
+              {t("layout.teacherQrCode")}
+            </Link>
+            <button
+              type="button"
+              onClick={() => setShowAdd(true)}
+              className="inline-flex items-center gap-2 rounded-lg bg-brand-teal px-4 py-3 text-sm font-semibold text-white"
+            >
+              <Plus className="h-4 w-4" />
+              {t("common.addChild")}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -111,6 +122,7 @@ export default function ParentDashboard() {
             <Input label={t("child.dob")} type="date" value={form.dob} onChange={(value) => setForm((current) => ({ ...current, dob: value }))} error={errors.dob} />
             <Input label={t("child.bloodType")} value={form.bloodType} onChange={(value) => setForm((current) => ({ ...current, bloodType: value }))} />
             <Input label={t("child.allergies")} value={form.allergies} onChange={(value) => setForm((current) => ({ ...current, allergies: value }))} />
+            <Input label={t("child.chronicIllnesses")} value={form.chronicIllnesses} onChange={(value) => setForm((current) => ({ ...current, chronicIllnesses: value }))} />
             <Input label={t("child.clinic")} value={form.clinicId} onChange={(value) => setForm((current) => ({ ...current, clinicId: value }))} />
             <button
               type="submit"

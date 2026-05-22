@@ -1,11 +1,9 @@
 import {
   Baby,
   BellRing,
-  ChartColumn,
   ClipboardPlus,
   FolderKanban,
   House,
-  Map,
   QrCode,
   Sparkles,
   Syringe,
@@ -22,8 +20,6 @@ export const doctorItems = [
   { to: buildAppPath("/visit-reports"), icon: FolderKanban, key: "layout.nav.visitHistory" },
   { to: buildAppPath("/staff-directory"), icon: Users, key: "layout.nav.staffDirectory" },
   { to: buildAppPath("/staff-profile"), icon: UserRound, key: "layout.nav.myProfile" },
-  { to: buildAppPath("/outbreak"), icon: Map, key: "layout.nav.outbreakMap" },
-  { to: buildAppPath("/coverage-analytics"), icon: ChartColumn, key: "layout.nav.coverageAnalytics" },
 ];
 
 export const parentItems = [
